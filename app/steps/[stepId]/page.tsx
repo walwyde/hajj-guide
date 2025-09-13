@@ -599,7 +599,7 @@ export default function StepDetail() {
 
   if (!step) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto mt-4 px-4 py-8">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-foreground mb-4">Step Not Found</h1>
           <p className="text-muted-foreground mb-4">The step with ID "{stepId}" could not be found.</p>
@@ -901,6 +901,7 @@ export default function StepDetail() {
                   onComplete={() => handleSectionComplete("hadith")}
                 />
               </CardContent>
+                {step.title.toLowerCase().includes("tawaf") && (<Button onClick={() => navigate.push("/tawaf-counter")} className="bg-purple-400">Use Tawaf Counter</Button>)}
             </Card>
           </div>
 

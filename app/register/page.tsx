@@ -55,7 +55,7 @@
 //   )
 // }
 'use client';
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -64,10 +64,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2, UserPlus, ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import { useToast } from "@/hooks/useToast";
 
 
 export default function RegisterPage() {
+  const toast = useToast();
   const navigate = useRouter();
   const [fields, setFields] = useState<{ name: string; email: string; password: string; error: string | null }>({
     name: '',
@@ -104,6 +106,21 @@ export default function RegisterPage() {
       setError('An unexpected error occurred');
     }
   }
+
+  async function checkSession () {
+    try {
+      const res = await fetch("/api/session");
+      if(!res.ok) return toast.toast({title: "Couldn't verify user session"})
+        const session = await res.json();
+      if(session.user) return navigate.push("/dashboard")
+        return;
+    } catch (error : any) {
+      console.log(error)
+      toast.toast({title: error.message, variant: "destructive"})
+    }
+  }
+
+  useEffect(() => {checkSession()},[])
 
   return (
     <div className="min-h-screen bg-gradient-subtle flex items-center justify-center p-4">

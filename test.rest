@@ -1,0 +1,1 @@
+GET https://api.aladhan.com/v1/timingsByCity/10-09-2015?country=GB&city=London HTTP/1.1

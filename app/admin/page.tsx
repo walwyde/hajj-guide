@@ -1,22 +1,43 @@
+'use client';
 import { redirect } from "next/navigation";
-import { getSession } from "@/lib/auth";
 import AdminTable from "@/components/AdminTable";
+import { useEffect, useState } from "react";
+import { toast } from "@/hooks/useToast";
 
-async function requireAdmin() {
-  const session = await getSession();
-  if (!session.user) redirect('/login');
-  if (session.user.role !== 'admin') redirect('/dashboard');
-  return session.user;
+
+export default function AdminPage() {
+  const [user, setUser] = useState<{role: string;} | null>(null);
+  const [loading, setLoading] = useState<Boolean>(false);
+
+  async function requireAdmin() {
+
+  try {
+    setLoading(true);
+    const res = await fetch("/api/session");
+    if(res?.ok) {
+      const data = await res.json();
+      if(data.user.role !== "admin") {
+        toast({title: "unauthorized", variant: "destructive"})
+        redirect("/dashboard");
+      };
+      setUser(s => ({...s, ...data.user}));
+      setLoading(false);
+    }
+    setLoading(false);
+
+  } catch (error) {
+    console.log(error)
+    setLoading(false)
+    return null;
+  }
 }
 
-export default async function AdminPage() {
-  await requireAdmin();
-  return (
+  useEffect(() => {
+   requireAdmin();
+  },[])
+  
+  return loading ? (<div>Loading ..... </div>) : (
     <div className="space-y-4">
-      <div className="card">
-        <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-        <p className="text-slate-300">Monitor online users and manage accounts.</p>
-      </div>
       <AdminTable />
     </div>
   )

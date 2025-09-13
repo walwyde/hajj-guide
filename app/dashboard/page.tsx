@@ -1,185 +1,4 @@
 
-// 'use client';
-
-// import { useState, useEffect } from 'react';
-// import { useRouter } from 'next/navigation';
-// import { HAJJ_STEPS } from '@/lib/steps';
-// import { getStepImage } from '@/lib/step-images';
-// import { Button } from '@/components/ui/button';
-// import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-// import { Badge } from '@/components/ui/badge';
-// import { Progress } from '@/components/ui/progress';
-// import { CheckCircle, Clock, ArrowRight, BookOpen } from 'lucide-react';
-// import Image from 'next/image';
-// import { toast } from 'sonner';
-
-// const Dashboard = () => {
-//   const navigate = useRouter();
-//   const [completedSteps, setCompletedSteps] = useState<Record<string, boolean>>({});
-
-//    const loadProgress = async () => {
-//       try {
-//         let steps;
-//         const response = await fetch("/api/steps")
-//         if (response.ok) {
-//           const data = await response.json()
-//          steps = data.progress;
-//          steps.forEach((element : any) => {
-//           setCompletedSteps(arr => ({...arr, [element.stepId]: element.completed}))
-//          });
-//          localStorage.setItem("completed", JSON.stringify(completedSteps))
-//         }
-//       } catch (error) {
-//         console.error("Failed to load progress:", error)
-//      toast.error("failed to load user progress");
-//       }
-//     }
-
-//   useEffect(() => {
-//     // Load progress from localStorage
-//     const savedProgress = localStorage.getItem('hajj-progress');
-//     if (savedProgress) {
-//       setCompletedSteps(JSON.parse(savedProgress));
-//     }
-//     loadProgress()
-//   }, []);
-
-//   const completedCount = Object.values(completedSteps).filter(Boolean).length;
-//   const progressPercentage = (completedCount / HAJJ_STEPS.length) * 100;
-
-//   return (
-//     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
-//       <div className="container mx-auto px-4 py-8">
-//         {/* Header */}
-//         <div className="text-center mb-8">
-//           <h1 className="text-4xl font-bold text-foreground mb-4">Hajj Journey</h1>
-//           <p className="text-xl text-muted-foreground mb-6">
-//             Learn and track your progress through the sacred pilgrimage
-//           </p>
-          
-//           {/* Progress Overview */}
-//           <Card className="max-w-md mx-auto">
-//             <CardHeader>
-//               <CardTitle className="text-lg">Your Progress</CardTitle>
-//             </CardHeader>
-//             <CardContent className="space-y-4">
-//               <div className="flex items-center justify-between">
-//                 <span className="text-sm text-muted-foreground">Steps Completed</span>
-//                 <span className="font-semibold">{completedCount} / {HAJJ_STEPS.length}</span>
-//               </div>
-//               <Progress value={progressPercentage} className="w-full" />
-//               <p className="text-xs text-muted-foreground">
-//                 {progressPercentage.toFixed(0)}% Complete
-//               </p>
-//             </CardContent>
-//           </Card>
-//         </div>
-
-//         {/* Steps Grid */}
-//         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-//           {HAJJ_STEPS.map((step, index) => {
-//             const isCompleted = completedSteps[step.id];
-            
-//             return (
-//               <Card 
-//                 key={step.id} 
-//                 className={`border-card-border hover:scale-105 hover:border-accent/30 transition-all duration-300 cursor-pointer ${
-//                   isCompleted ? 'ring-2 ring-green-500/20 bg-green-50/10' : ''
-//                 }`}
-//                 onClick={() => navigate.push(`/steps/${step.id}`)}
-//               >
-//                 <div className="relative">
-//                   <Image 
-//                     src={getStepImage(step.id)} 
-//                     alt={step.title}
-//                     className="w-full h-48 object-cover rounded-t-lg"
-//                     width={400}
-//                     height={200}
-//                   />
-//                   <div className="absolute top-2 left-2">
-//                     <Badge variant="secondary" className="text-xs">
-//                       Step {index + 1}
-//                     </Badge>
-//                   </div>
-//                   <div className="absolute top-2 right-2">
-//                     {isCompleted && (
-//                       <Badge className="bg-green-600 text-white">
-//                         <CheckCircle className="w-3 h-3 mr-1" />
-//                         Done
-//                       </Badge>
-//                     )}
-//                   </div>
-//                 </div>
-                
-//                 <CardHeader className="pb-2">
-//                   <CardTitle className="text-lg leading-tight">{step.title}</CardTitle>
-//                 </CardHeader>
-                
-//                 <CardContent className="space-y-3">
-//                   <p className="text-sm text-muted-foreground line-clamp-2">
-//                     {step.description}
-//                   </p>
-                  
-//                   <div className="flex items-center justify-between">
-//                     <div className="flex items-center gap-2">
-//                       <Clock className="w-4 h-4 text-muted-foreground" />
-//                       <span className="text-sm text-muted-foreground">{step.day}</span>
-//                     </div>
-//                     {step.mandatory && (
-//                       <Badge className="bg-accent text-accent-foreground text-xs">
-//                         Mandatory
-//                       </Badge>
-//                     )}
-//                   </div>
-                  
-//                   <Button 
-//                     className="w-full mt-4" 
-//                     variant={isCompleted ? "secondary" : "default"}
-//                     onClick={(e) => {
-//                       e.stopPropagation();
-//                       navigate.push(`/steps/${step.id}`);
-//                     }}
-//                   >
-//                     {isCompleted ? (
-//                       <>
-//                         <BookOpen className="w-4 h-4 mr-2" />
-//                         Review Step
-//                       </>
-//                     ) : (
-//                       <>
-//                         <ArrowRight className="w-4 h-4 mr-2" />
-//                         Start Learning
-//                       </>
-//                     )}
-//                   </Button>
-//                 </CardContent>
-//               </Card>
-//             );
-//           })}
-//         </div>
-
-//         {/* Completion Message */}
-//         {completedCount === HAJJ_STEPS.length && (
-//           <Card className="mt-8 border-green-200 bg-green-50/10">
-//             <CardContent className="text-center py-8">
-//               <CheckCircle className="w-16 h-16 text-green-600 mx-auto mb-4" />
-//               <h3 className="text-2xl font-bold text-green-700 mb-2">
-//                 Congratulations! 🎉
-//               </h3>
-//               <p className="text-green-600">
-//                 You have completed learning about all the steps of Hajj. 
-//                 May Allah accept your preparation and bless your pilgrimage.
-//               </p>
-//             </CardContent>
-//           </Card>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Dashboard;
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -199,7 +18,7 @@ const Dashboard = () => {
   const navigate = useRouter();
   const [completedSteps, setCompletedSteps] = useState<Record<string, boolean>>({});
   const [hajjType, setHajjType] = useState<'tamattu' | 'qiran' | 'ifrad' | null>(null);
-  const [user, setUser] = useState<{ id: string; name?: string; email?: string } | null>(null);
+  const [user, setUser] = useState<{ id: string; name?: string; email?: string; role: string;} | null>(null);
 
   // Load user session
   useEffect(() => {
@@ -215,6 +34,9 @@ const Dashboard = () => {
           navigate.push('/login');
           return;
         }
+
+        if(session.user?.role === "admin") return navigate.push("/admin");
+
         setUser(session.user);
         // Update last seen
         await fetch('/api/heartbeat', { method: 'POST' });
@@ -247,7 +69,6 @@ const Dashboard = () => {
             progress[element.stepId] = element.completed;
           });
           setCompletedSteps(s => ({...s, ...progress}));
-          console.log(progress)
         } else {
           toast.error('Failed to load user progress');
         }

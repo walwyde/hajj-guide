@@ -1,12 +1,12 @@
 {
-  "/api/heartbeat/route": "app/api/heartbeat/route.js",
   "/api/session/route": "app/api/session/route.js",
   "/api/auth/login/route": "app/api/auth/login/route.js",
   "/api/steps/route": "app/api/steps/route.js",
-  "/api/auth/logout/route": "app/api/auth/logout/route.js",
-  "/dashboard/page": "app/dashboard/page.js",
-  "/guide/page": "app/guide/page.js",
-  "/register/page": "app/register/page.js",
+  "/api/heartbeat/route": "app/api/heartbeat/route.js",
   "/login/page": "app/login/page.js",
-  "/steps/[stepId]/page": "app/steps/[stepId]/page.js"
+  "/prayer-time/page": "app/prayer-time/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/steps/[stepId]/page": "app/steps/[stepId]/page.js",
+  "/tawaf-counter/page": "app/tawaf-counter/page.js",
+  "/_not-found/page": "app/_not-found/page.js"
 }

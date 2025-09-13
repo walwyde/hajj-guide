@@ -77,6 +77,12 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   handler satisfies AppPageConfig<"/">
 }
 
+// Validate ..\..\app\prayer-time\page.tsx
+{
+  const handler = {} as typeof import("..\\..\\app\\prayer-time\\page.js")
+  handler satisfies AppPageConfig<"/prayer-time">
+}
+
 // Validate ..\..\app\register\page.tsx
 {
   const handler = {} as typeof import("..\\..\\app\\register\\page.js")
@@ -87,6 +93,12 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 {
   const handler = {} as typeof import("..\\..\\app\\steps\\[stepId]\\page.js")
   handler satisfies AppPageConfig<"/steps/[stepId]">
+}
+
+// Validate ..\..\app\tawaf-counter\page.tsx
+{
+  const handler = {} as typeof import("..\\..\\app\\tawaf-counter\\page.js")
+  handler satisfies AppPageConfig<"/tawaf-counter">
 }
 
 // Validate ..\..\app\api\auth\login\route.ts
