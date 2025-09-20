@@ -286,10 +286,11 @@
 //                 />
 //               </CardContent>
 //             </Card>
-//              <div>       
+//             {/* Audio Resources */}
+//             <div className="space-y-4">       
 //               <h3 className="text-lg font-semibold mb-2">Audio Narration</h3>
-//                  <audio
-//                  controls
+//               <audio
+//                 controls
 //                 className="w-full max-w-md"
 //                 aria-label={`Narration for ${step.title}`}
 //               >
@@ -297,6 +298,40 @@
 //                 Your browser does not support the audio element.
 //               </audio>
 //             </div>
+//             
+//             {/* Video Resource */}
+//             <div className="mt-6">
+//               <h3 className="text-lg font-semibold mb-2">Video Guide</h3>
+//               <div className="relative pb-[56.25%] h-0 overflow-hidden rounded-lg shadow-md">
+//                 <iframe 
+//                   src={step.content.video} 
+//                   className="absolute top-0 left-0 w-full h-full"
+//                   title={`Video guide for ${step.title}`}
+//                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+//                   allowFullScreen
+//                 ></iframe>
+//               </div>
+//             </div>
+//             
+//             {/* Authentic Prayer */}
+//             <Card className="mt-6 border-card-border hover:border-accent/30 transition-colors bg-gradient-to-br from-card to-primary/5">
+//               <CardHeader>
+//                 <CardTitle className="text-xl text-primary">Authentic Prayer</CardTitle>
+//               </CardHeader>
+//               <CardContent className="space-y-6">
+//                 <div className="text-right text-2xl font-arabic leading-relaxed p-4 bg-background/50 rounded-lg">
+//                   {step.content.authenticPrayer.arabic}
+//                 </div>
+//                 <div className="p-4 bg-background/50 rounded-lg">
+//                   <h4 className="font-semibold mb-2">Transliteration</h4>
+//                   <p className="italic">{step.content.authenticPrayer.transliteration}</p>
+//                 </div>
+//                 <div className="p-4 bg-background/50 rounded-lg">
+//                   <h4 className="font-semibold mb-2">Translation</h4>
+//                   <p>{step.content.authenticPrayer.translation}</p>
+//                 </div>
+//               </CardContent>
+//             </Card>
 
 //             {/* Procedure */}
 //             <Card className="border-card-border hover:border-accent/30 transition-colors">

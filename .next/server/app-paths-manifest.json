@@ -1,12 +1,7 @@
 {
+  "/api/scholars/steps/route": "app/api/scholars/steps/route.js",
   "/api/session/route": "app/api/session/route.js",
-  "/api/auth/login/route": "app/api/auth/login/route.js",
-  "/api/steps/route": "app/api/steps/route.js",
-  "/api/heartbeat/route": "app/api/heartbeat/route.js",
-  "/login/page": "app/login/page.js",
-  "/prayer-time/page": "app/prayer-time/page.js",
-  "/dashboard/page": "app/dashboard/page.js",
-  "/steps/[stepId]/page": "app/steps/[stepId]/page.js",
-  "/tawaf-counter/page": "app/tawaf-counter/page.js",
-  "/_not-found/page": "app/_not-found/page.js"
+  "/api/scholars/auth/route": "app/api/scholars/auth/route.js",
+  "/scholar/login/page": "app/scholar/login/page.js",
+  "/scholar/dashboard/page": "app/scholar/dashboard/page.js"
 }
