@@ -1,47 +1,4 @@
-// 'use client';
-// import { useRouter } from "next/navigation";
-// import { useState } from "react";
 
-// export default function LoginPage() {
-//   const router = useRouter();
-//   const [email, setEmail] = useState('');
-//   const [password, setPassword] = useState('');
-//   const [error, setError] = useState<string | null>(null);
-//   const [loading, setLoading] = useState(false);
-
-//   async function submit(e: React.FormEvent) {
-//     try {
-
-//       e.preventDefault();
-//       setLoading(true);
-//       setError(null);
-//       const res = await fetch('/api/auth/login', {
-//         method: 'POST',
-//         headers: {'Content-Type':'application/json'},
-//         body: JSON.stringify({ email, password })
-//       });
-//       const data = await res.json();
-//       setLoading(false);
-//       if (!res.ok) { setError(data.error || 'Login failed'); return; }
-//       router.push('/dashboard');
-//     } catch {
-//       setLoading(false);
-//       setError('An unexpected error occurred');
-//     }
-//   }
-
-//   return (
-//     <div className="max-w-md mx-auto card">
-//       <h1 className="text-2xl font-bold mb-4">Login</h1>
-//       <form className="space-y-3" onSubmit={submit}>
-//         <input className="input" placeholder="Email" value={email} onChange={e=>setEmail(e.target.value)} />
-//         <input className="input" placeholder="Password" type="password" value={password} onChange={e=>setPassword(e.target.value)} />
-//         {error && <div className="text-red-400 text-sm">{error}</div>}
-//         <button className="btn w-full" disabled={loading}>{loading ? '...' : 'Login'}</button>
-//       </form>
-//     </div>
-//   )
-// }
  'use client';
 import { useState } from "react";
 import Link from "next/link";
@@ -52,13 +9,19 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Label } from "@/components/ui/label";
 import { ArrowLeft, Loader2 } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/state/store";
+import { setAuth } from "@/state/authSlice";
 
 export default function LoginPage() {
   const navigate = useRouter();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  // const {setAuth} = useSelector((state: RootState) => state.auth)
 
   async function submit(e: React.FormEvent) {
     try {
@@ -74,11 +37,15 @@ export default function LoginPage() {
       
       const data = await res.json();
       setLoading(false);
+
+      dispatch(setAuth({user: data.user, loading: false}))
       
       if (!res.ok) { 
         setError(data.error || 'Login failed'); 
         return; 
       }
+
+
       
       navigate.replace('/dashboard');
     } catch {

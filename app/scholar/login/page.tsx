@@ -8,8 +8,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/components/ui/sonner";
+import { useDispatch } from "react-redux";
+import { setAuth } from "@/state/authSlice";
 
 export default function ScholarLogin() {
+  const dispatch = useDispatch();
   const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
@@ -39,6 +42,8 @@ export default function ScholarLogin() {
       });
 
       if (response.ok) {
+        const {scholar} = await response.json();
+        dispatch(setAuth({isAuthenticated: true, user: scholar, loading: false}))
         toast.success("Login successful");
         router.push("/scholar/dashboard");
       } else {

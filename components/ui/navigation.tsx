@@ -5,37 +5,23 @@ import { Menu, X, Sparkles } from "lucide-react";
 import cn from "@/lib/utils/cn";
 import { Toast } from "./toast";
 import { toast } from "sonner";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/state/store";
+import { logOut } from "@/state/authSlice";
 // import { Form } from "radix-ui";
 
-interface NavigationProps {
+export type userProp = {name: string; role: string, id: string}
+
+export interface NavigationProps {
     className?: string;
+    userProp: userProp | null;
 }
 
-export function Navigation({ className }: NavigationProps) {
-  const [user, setUser] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const loadUSer = async () => {
-    try {
-      setLoading(true)
-      const res = await fetch('/api/session');
-    
-      if(res.ok) {
-        const data = await res.json();
-        setUser(data.user);
-      }
-      setLoading(false)
-      
-    } catch (err:any) {
-      console.log(err)
-      toast.error(err.statusText)
-      setUser(null)
-      setLoading(false)
-    }
-  }
+export function Navigation({ className, userProp }: NavigationProps) {
+  const dispatch = useDispatch();
+  
+  const {isAuthenticated, loading} = useSelector((state: RootState) => state.auth)
 
-  useEffect(() => {
-    loadUSer();
-  }, [])
 
   const LogOut = async () => {
 
@@ -48,7 +34,7 @@ export function Navigation({ className }: NavigationProps) {
       <Toast content="Logout Failed" /> 
       return; 
     }
-    setUser(null)
+    dispatch(logOut())
   localStorage.removeItem("auth_token");
   localStorage.removeItem("user");
 
@@ -61,8 +47,8 @@ export function Navigation({ className }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { name: "About", href: "#about" },
-    { name: "Contact", href: "#contact" },
+    { name: "About", href: "/about" },
+    { name: "Scholar", href: "/scholar/login" },
   ];
 
   return (
@@ -97,10 +83,10 @@ export function Navigation({ className }: NavigationProps) {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-           {!user && ( <Button variant="ghost" size="sm">
+           {!isAuthenticated && ( <Button variant="ghost" size="sm">
               <a href="/login">Sign In</a>
             </Button>)}
-              {user && (<Button variant="ghost" size="sm" onClick={LogOut}>
+              {isAuthenticated && (<Button variant="ghost" size="sm" onClick={LogOut}>
                 Sign Out
               </Button>)}
             <Button variant="hero" size="sm" asChild>
