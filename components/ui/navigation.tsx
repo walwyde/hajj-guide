@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/state/store";
 import { logOut } from "@/state/authSlice";
+import Link from "next/link";
 // import { Form } from "radix-ui";
 
 export type userProp = {name: string; role: string, id: string}
@@ -48,7 +49,7 @@ export function Navigation({ className, userProp }: NavigationProps) {
 
   const navItems = [
     { name: "About", href: "/about" },
-    { name: "Scholar", href: "/scholar/login" },
+    { name: isAuthenticated ? "" : "Scholar", href: "/scholar/login" },
   ];
 
   return (
@@ -71,13 +72,13 @@ export function Navigation({ className, userProp }: NavigationProps) {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.name}
                 href={item.href}
                 className="text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium"
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -89,9 +90,9 @@ export function Navigation({ className, userProp }: NavigationProps) {
               {isAuthenticated && (<Button variant="ghost" size="sm" onClick={LogOut}>
                 Sign Out
               </Button>)}
-            <Button variant="hero" size="sm" asChild>
+            {/* <Button variant="hero" size="sm" asChild>
               <a href="/guide">Get Started</a>
-            </Button>
+            </Button> */}
           </div>
 
           {/* Mobile Menu Button */}
@@ -118,7 +119,7 @@ export function Navigation({ className, userProp }: NavigationProps) {
                   className="text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium py-2"
                   onClick={() => setIsOpen(false)}
                 >
-                  {item.name}
+                  { item.name }
                 </a>
               ))}
               <div className="flex flex-col space-y-2 pt-4">

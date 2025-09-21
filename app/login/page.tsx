@@ -38,7 +38,7 @@ export default function LoginPage() {
       const data = await res.json();
       setLoading(false);
 
-      dispatch(setAuth({user: data.user, loading: false}))
+      dispatch(setAuth({user: data.user, loading: false, isAuthenticated: true}))
       
       if (!res.ok) { 
         setError(data.error || 'Login failed'); 

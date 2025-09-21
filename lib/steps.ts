@@ -34,10 +34,22 @@ export interface HajjStep {
   mandatory: boolean | { [key in 'tamattu' | 'qiran' | 'ifrad']: boolean };
   hajjTypes: ('tamattu' | 'qiran' | 'ifrad')[];
   content: HajjStepContent;
+  dua: {
+    arabicText: string;
+    translation: string;
+    transliteration: string;
+    audioSource : string;
+  };
 }
 
 export const HAJJ_STEPS: HajjStep[] = [
   {
+    dua: {
+      transliteration: "Labbayka Allāhumma labbayk, labbayka lā sharīka laka labbayk, inna al-ḥamda wa-n- ni'mata laka wa-l-mulk, lā sharīka lak.",
+translation : "Here I am, O Allah, here I am. Here I am, You have no partner, here I am. Indeed, all praise, grace, and sovereignty belong to You. You have no partner.",
+arabicText: "لَبَّيْكَ اللَّهُمَّ لَبَّيْك، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْك، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْك، لَا شَرِيكَ لَكَ",
+audioSource: "https://on.soundcloud.com/A8kdUts1pvpIb7pLgY"
+  },
     id: "ihram",
     title: "Entering the State of Ihram",
     day: "Day 1",
@@ -122,6 +134,13 @@ export const HAJJ_STEPS: HajjStep[] = [
     }
   },
   {
+     dua: {
+      transliteration: "Bismillāhi wa-Allāhu akbar, Allāhumma īmānan bika, wa taṣdīqan bikitābik, wa wafā’an bi‘ahdik, wa ittibā‘an lisunnati nabiyyika Muḥammad ṣallā Allāhu ‘alayhi wa sallam.",
+translation : "In the name of Allah, and Allah is the Greatest. O Allah, (I do this) out of faith in You, belief in Your Book, fulfillment of Your covenant, and following the Sunnah of Your Prophet Muhammad ﷺ .",
+arabicText: "بِسْمِ اللَّهِ وَاللَّهُ أَكْبَرُ، اللَّهُمَّ إِيمَانًا بِكَ، وَتَصْدِيقًا بِكِتَابِكَ، وَوَفَاءً بِعَهْدِكَ، وَاتِّبَاعًا لِسُنَّةِ نَبِيِّكَ مُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+audioSource: "audios/dua/tawaf-qudum"
+
+  },
     id: "tawaf-qudum",
     title: "Tawaf al-Qudum (Arrival Tawaf)",
     day: "Day 1-2",
@@ -207,6 +226,13 @@ export const HAJJ_STEPS: HajjStep[] = [
     }
   },
   {
+     dua: {
+      transliteration: "Innaṣ-Ṣafā wal-Marwata min sha'ā'iril-lāh. Faman ḥajja al-bayta awi'tamara fa lā junāḥa 'alayhi an yaṭṭawwafa bihimā. Wa man taṭawwa'a khayran fa inna Allāha shākirun 'alīm.",
+translation : "Indeed, as-Safa and al-Marwah are among the symbols of Allah. So whoever makes Hajj to the House or performs 'umrah – there is no blame upon him for walking between them. And whoever volunteers good – then indeed, Allah is appreciative and Knowing",
+arabicText: "إِنَّ الصَّفَا وَٱلْمَرْوَةَ مِن شَعَاۤئِرِ ٱللَّهِ ۖ فَمَنْ حَجَّ ٱلْبَيْتَ أَوِ ٱعْتَمَرَ فَلَا جُنَاحَ عَلَيْهِ أَن يَطَّوَّفَ بِهِمَاۚ وَمَن تَطَوَّعَ خَيْرًا فَإِنَّ ٱللَّهَ شَاكِرٌ عَلِيمٌ",
+audioSource: "audios/dua/sai"
+
+  },
     id: "sai",
     title: "Sa'i between Safa and Marwah",
     day: "Day 1-2",
@@ -293,6 +319,13 @@ export const HAJJ_STEPS: HajjStep[] = [
     }
   },
   {
+     dua: {
+      transliteration: "Allāhumma hādhihi Minā fa-an'im 'alayya bimā an'amta 'alā awliyā'ika.",
+translation : "O Allah, this is Mina; so bless me with what You have blessed Your closest friends with.",
+arabicText: "اللَّهُمَّ هَذِهِ مِنًى فَأَنْعِمْ عَلَيَّ بِمَا أَنْعَمْتَ عَلَى أَوْلِيَائِكَ",
+audioSource: "audios/dua/mina"
+
+  },
     id: "mina",
     title: "Departure to Mina",
     day: "Day 8 (Tarwiyah)",
@@ -378,6 +411,13 @@ export const HAJJ_STEPS: HajjStep[] = [
     }
   },
   {
+     dua: {
+      transliteration: "Lā ilāha illā Allāhu waḥdahu lā sharīka lahu,lahu al-mulku wa lahu al-ḥamdu, yuḥyī wa yumītu, wa huwa ḥayyun lā yamūtu abadan abadā, dhū al-jalāli wa-al-ikrām, biyadihi al-khayr, wa huwa 'alā kulli shay'in qadīr.",
+translation : " There is no god except Allah,alone, with no partner. His is the dominion, and His is the praise. He gives life and causes death, and He is ever-living and does not die, forever and ever. He is the Possessor of Glory and Honor. In His hand is all goodness, and He has power over all things",
+arabicText: "لَا إِلَـٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ يُحْيِي وَيُمِيتُ وَهُوَ حَيٌّ لَا يَمُوتُ أَبَدًا أَبَدًا ذُو الْجَلَالِ وَالْإِكْرَامِ بِيَدِهِ الْخَيْرُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+audioSource: "audios/dua/arafah"
+
+  },
     id: "arafah",
     title: "Standing at Arafah",
     day: "Day 9 (Arafah)",
@@ -464,6 +504,13 @@ export const HAJJ_STEPS: HajjStep[] = [
     }
   },
   {
+     dua: {
+      transliteration: "Allāhumma innī as’aluka al-khayra kullahu wa a‘ūdhu bika mina ash- sharri kullihi.",
+translation : "O Allah, I ask You for all that is good and seek refuge in You from all that is evil.",
+arabicText: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْخَيْرَ كُلَّهُ وَأَعُوذُ بِكَ مِنَ الشَّرِّ كُلِّهِ",
+audioSource: "audios/dua/muzdalifah"
+
+  },
     id: "muzdalifah",
     title: "Night at Muzdalifah",
     day: "Night of Day 9-10",
@@ -550,6 +597,13 @@ export const HAJJ_STEPS: HajjStep[] = [
     }
   },
   {
+     dua: {
+      transliteration: "Allāhumma aj'alhu ḥajjan mabrūran wa dhanban maghfūran wa sa'yan mashkūran",
+translation : " O Allah, make it a Hajj that is accepted, a sin that is forgiven, and an effort that is appreciated.",
+arabicText: "اللَّهُمَّ اجْعَلْهُ حَجًّا مَبْرُورًا وَذَنْبًا مَغْفُورًا وَسَعْيًا مَشْكُورًا",
+audioSource: "audios/dua/jamarat"
+
+  },
     id: "jamarat",
     title: "Stoning the Jamarat",
     day: "Days 10-13",
@@ -635,6 +689,13 @@ export const HAJJ_STEPS: HajjStep[] = [
     }
   },
   {
+     dua: {
+      transliteration: "Allāhumma taqabbal minnī kamā taqabbalta min Ibrāhīm.",
+translation : "O Allah, accept from me just as You accepted from Your beloved Ibrahim (AS).",
+arabicText: "اللَّهُمَّ تَقَبَّلْ مِنِّي كَمَا تَقَبَّلْتَ مِنْ إِبْرَاهِيمَ",
+audioSource: "audios/dua/sacrifice"
+
+  },
     id: "sacrifice",
     title: "Animal Sacrifice (Qurbani)",
     day: "Day 10",
@@ -720,6 +781,13 @@ export const HAJJ_STEPS: HajjStep[] = [
     }
   },
   {
+     dua: {
+      transliteration: "Allāhumma aghfir lī dhunūbī wa taqabbal minnī nusukī.",
+translation : "O Allah, forgive my sins and accept my sacrifice.",
+arabicText: "اللَّهُمَّ اغْفِرْ لِي ذُنُوبِي وَتَقَبَّلْ مِنِّي نُسُكِي",
+audioSource: "audios/dua/halq-taqsir"
+
+  },
     id: "halq-taqsir",
     title: "Shaving or Trimming Hair",
     day: "Day 10",
@@ -805,6 +873,13 @@ export const HAJJ_STEPS: HajjStep[] = [
     }
   },
   {
+     dua: {
+      transliteration: "Allāhumma innī as'aluka al-'afwa wa al-'āfiyata fi al-dunyā wa al-ākhirah.",
+translation : "O Allah, I ask You for pardon and well-being in this world and the Hereafter",
+arabicText: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالآخِرَةِ",
+audioSource: "audios/dua/tawaf-ifadah"
+
+  },
     id: "tawaf-ifadah",
     title: "Tawaf al-Ifadah",
     day: "Day 10-12",
