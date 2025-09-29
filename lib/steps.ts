@@ -48,7 +48,7 @@ export const HAJJ_STEPS: HajjStep[] = [
       transliteration: "Labbayka Allāhumma labbayk, labbayka lā sharīka laka labbayk, inna al-ḥamda wa-n- ni'mata laka wa-l-mulk, lā sharīka lak.",
 translation : "Here I am, O Allah, here I am. Here I am, You have no partner, here I am. Indeed, all praise, grace, and sovereignty belong to You. You have no partner.",
 arabicText: "لَبَّيْكَ اللَّهُمَّ لَبَّيْك، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْك، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْك، لَا شَرِيكَ لَكَ",
-audioSource: "https://on.soundcloud.com/A8kdUts1pvpIb7pLgY"
+audioSource: "audios/dua/ihram"
   },
     id: "ihram",
     title: "Entering the State of Ihram",

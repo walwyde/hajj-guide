@@ -12,9 +12,9 @@ export default function TawafCounter() {
   const [currentDua, setCurrentDua] = useState(0);
   
   // Animation states
-  const [pilgrims, setPilgrims] = useState([]);
-  const animationRef = useRef(null);
-  const audioRef = useRef(null);
+  const [pilgrims, setPilgrims] = useState<any>([]);
+  const animationRef = useRef<any>(null);
+  const audioRef = useRef<any>(null);
 
   const duas = [
     {
@@ -53,7 +53,7 @@ export default function TawafCounter() {
   useEffect(() => {
     if (isRunning) {
       const animate = () => {
-        setPilgrims(prev => prev.map(pilgrim => ({
+        setPilgrims((prev: any) => prev.map((pilgrim: any) => ({
           ...pilgrim,
           angle: pilgrim.angle + pilgrim.speed * 0.01
         })));
@@ -81,11 +81,11 @@ export default function TawafCounter() {
         setCurrentDua((prev) => (prev + 1) % duas.length);
       }
 
-      if (newCount === 7) {
+      if (newCount === 7) {   
         setIsCompleted(true);
         setIsRunning(false);
         if (audioEnabled && audioRef.current) {
-          audioRef.current.play().catch(e => console.log('Audio play failed:', e));
+          audioRef.current.play().catch((e: any) => console.log('Audio play failed:', e));
         }
       }
     }

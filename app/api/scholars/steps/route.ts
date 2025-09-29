@@ -44,11 +44,12 @@ export async function PUT(request: NextRequest) {
       scholar.reviewedSteps.push(stepId);
       await scholar.save();
     }
+
+    
     
     return NextResponse.json(
       { 
         message: "Step updated successfully",
-        note: "In a production environment, this would update the actual step data in the database"
       },
       { status: 200 }
     );

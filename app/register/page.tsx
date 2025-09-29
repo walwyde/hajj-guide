@@ -66,6 +66,8 @@ import { Loader2, UserPlus, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { redirect, useRouter } from "next/navigation";
 import { useToast } from "@/hooks/useToast";
+import { Eye, EyeOff } from "lucide-react";
+
 
 
 export default function RegisterPage() {
@@ -77,6 +79,7 @@ export default function RegisterPage() {
     password: '',
     error: null,
   });
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
   const setField = (key: 'name' | 'email' | 'password', value: string) => {
@@ -186,20 +189,29 @@ export default function RegisterPage() {
               </div>
 
               {/* Password Field */}
-              <div className="space-y-2">
-                <Label htmlFor="password" className="text-sm font-medium">
-                  Password
-                </Label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="Create a strong password"
-                  value={password}
-                  onChange={e => setField('password', e.target.value)}
-                  className="h-11"
-                  required
-                />
-              </div>
+             <div className="space-y-2 relative">
+  <Label htmlFor="password" className="text-sm font-medium">
+    Password
+  </Label>
+  <div className="relative">
+    <Input
+      id="password"
+      type={showPassword ? "text" : "password"}
+      placeholder="Create a strong password"
+      value={password}
+      onChange={e => setField('password', e.target.value)}
+      className="h-11 pr-10"
+      required
+    />
+    <button
+      type="button"
+      onClick={() => setShowPassword(prev => !prev)}
+      className="absolute inset-y-0 right-0 flex items-center pr-3 text-muted-foreground hover:text-foreground transition-colors"
+    >
+      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+    </button>
+  </div>
+</div>
 
               {/* Error Message */}
               {error && (

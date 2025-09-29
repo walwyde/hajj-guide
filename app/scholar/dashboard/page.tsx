@@ -86,41 +86,38 @@ export default function ScholarDashboard() {
   };
 
   const handleSaveChanges = async () => {
-    if (!selectedStep || !editedStep) return;
-    if (!scholarId) {
-      toast.error("Authentication error. Please log in again.");
-      router.push("/scholar/login");
-      return;
-    }
+  if (!selectedStep || !editedStep) return;
+  if (!scholarId) {
+    toast.error("Authentication error. Please log in again.");
+    router.push("/scholar/login");
+    return;
+  }
 
-    try {
-      setLoading(true);
-      const response = await fetch("/api/scholars/steps", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          stepId: selectedStep.id,
-          updates: editedStep,
-          scholarId: scholarId // Using the actual scholar ID from session
-        }),
-      });
+  try {
+    setLoading(true);
+    const response = await fetch(`/api/scholars/steps/${selectedStep.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        updates: editedStep,
+        scholarId: scholarId
+      }),
+    });
 
-      if (response.ok) {
-        toast.success("Step updated successfully");
-        fetchSteps(); // Refresh steps
-      } else {
-        const error = await response.json();
-        toast.error(error.message || "Failed to update step");
-      }
-    } catch (error) {
-      console.error("Error updating step:", error);
-      toast.error("Failed to update step");
-    } finally {
-      setLoading(false);
+    if (response.ok) {
+      toast.success("Step updated successfully");
+      fetchSteps(); // Refresh steps
+    } else {
+      const error = await response.json();
+      toast.error(error.message || "Failed to update step");
     }
-  };
+  } catch (error) {
+    console.error("Error updating step:", error);
+    toast.error("Failed to update step");
+  } finally {
+    setLoading(false);
+  }
+};
 
   if (loading && steps.length === 0) {
     return (

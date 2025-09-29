@@ -1,30 +1,4 @@
-// import Link from "next/link";
 
-// export default function Home() {
-//   return (
-//     <div className="grid gap-6 md:grid-cols-2">
-//       <div className="card">
-//         <h1 className="text-2xl font-bold mb-2">Assalamu alaikum 👋</h1>
-//         <p className="text-slate-300 mb-4">
-//           This interactive Hajj guide helps you track each step, stay organized, and complete your pilgrimage with confidence.
-//         </p>
-//         <div className="space-x-2">
-//           <Link href="/register" className="btn">Get Started</Link>
-//           <Link href="/guide" className="btn bg-slate-800 hover:bg-slate-700">View Guide</Link>
-//         </div>
-//       </div>
-//       <div className="card">
-//         <h2 className="text-xl font-semibold mb-2">Features</h2>
-//         <ul className="list-disc pl-6 text-slate-300 space-y-1">
-//           <li>Step-by-step checklist with progress</li>
-//           <li>Secure email/password login with sessions</li>
-//           <li>Admin dashboard: online users + user management</li>
-//           <li>MongoDB storage</li>
-//         </ul>
-//       </div>
-//     </div>
-//   )
-// }
  'use client';
  import * as React from 'react';
 import { Navigation } from "@/components/ui/navigation";
